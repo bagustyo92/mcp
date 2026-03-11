@@ -1,0 +1,45 @@
+# Code Review MCP - Configuration
+#
+# Copy this file to config.yaml and fill in your credentials.
+# IMPORTANT: Never commit config.yaml to version control — it contains secrets.
+
+auth:
+  bitbucket:
+    # Option 1 (Recommended): Atlassian API Token
+    # Create at: https://id.atlassian.com/manage-profile/security/api-tokens
+    # Required scopes: none (token inherits your account permissions)
+    email: "your-atlassian-email@example.com"
+    api_token: "ATATT3x..."
+
+    # Option 2 (Legacy): Bitbucket App Password
+    # Create at: https://bitbucket.org/account/settings/app-passwords/
+    # Required permissions: Repositories (Read), Pull requests (Read + Write)
+    # username: "your-bitbucket-username"
+    # app_password: "your-app-password"
+
+# Map repositories to their review instruction files.
+# When a PR URL is provided, the MCP matches the workspace/repo-slug
+# to find the corresponding instructions.
+#
+# Use "*" as repo_slug for a default/fallback configuration.
+projects:
+  - repo_slug: "mid-kelola-indonesia/talenta-data-api"
+    review_instructions: null  # e.g. "/absolute/path/to/code-review-instructions.md"
+    project_guidelines: "/Users/mekari/Documents/mekari/talenta/talenta-data-api/.github/copilot-instructions.md"
+
+  - repo_slug: "mid-kelola-indonesia/disbursement-service"
+    review_instructions: null
+    project_guidelines: "/Users/mekari/Documents/mekari/talenta/disbursement-service/.github/copilot-instructions.md"
+
+  - repo_slug: "mid-kelola-indonesia/form-service"
+    review_instructions: null
+    project_guidelines: "/Users/mekari/Documents/mekari/talenta/form-service/.github/copilot-instructions.md"
+
+  - repo_slug: "mid-kelola-indonesia/notification-service"
+    review_instructions: null
+    project_guidelines: "/Users/mekari/Documents/mekari/talenta/notification-service/.github/copilot-instructions.md"
+
+  # Default fallback — used when no exact repo match is found
+  - repo_slug: "*"
+    review_instructions: null
+    project_guidelines: null
