@@ -1,0 +1,12 @@
+# Binary
+bin/
+
+# Config with secrets
+config.yaml
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store

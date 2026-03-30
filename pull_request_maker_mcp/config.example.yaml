@@ -1,0 +1,138 @@
+# Pull Request Maker MCP - Configuration
+#
+# Copy this file to config.yaml and fill in your credentials.
+# IMPORTANT: Never commit config.yaml to version control — it contains secrets.
+#
+# Quick start:
+#   make copy-config   → copies this file to config.yaml
+#   Fill in auth, gchat, and adjust project paths to match your local setup.
+
+auth:
+  bitbucket:
+    # Option 1 (Recommended): Atlassian API Token
+    # Create at: https://id.atlassian.com/manage-profile/security/api-tokens
+    email: "your-atlassian-email@example.com"
+    api_token: "ATATT3x..."
+
+    # Option 2 (Legacy): Bitbucket App Password
+    # Create at: https://bitbucket.org/account/settings/app-passwords/
+    # Required permissions: Repositories (Read), Pull requests (Read + Write)
+    # username: "your-bitbucket-username"
+    # app_password: "your-app-password"
+
+gchat:
+  # Incoming webhook URL for the Google Chat space.
+  # Create at: Google Chat space → Apps & integrations → Webhooks → Add webhook
+  webhook_url: "https://chat.googleapis.com/v1/spaces/XXXXX/messages?key=...&token=..."
+  # Base URL for Jira ticket links — used to auto-generate links from branch names.
+  jira_base_url: "https://your-org.atlassian.net/browse"
+
+# Map repositories to their review instructions, guidelines, and PR defaults.
+# Use "*" as repo_slug for a default/fallback configuration.
+#
+# Reviewer UUIDs: run this to find them:
+#   curl -u "email:api_token" "https://api.bitbucket.org/2.0/workspaces/{workspace}/members?pagelen=100"
+projects:
+  # TDA
+  - repo_slug: "mid-kelola-indonesia/talenta-data-api"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/go-code-review-instruction.md"
+    project_guidelines: "/path/to/talenta-data-api/.github/copilot-instructions.md"
+    default_target_branch: "master"
+    description_mode: "concise"   # "comprehensive" or "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:            # Bitbucket user UUIDs — include curly braces
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""         # optional: overrides global gchat.webhook_url for this repo
+
+  # Disbursement Service
+  - repo_slug: "mid-kelola-indonesia/disbursement-service"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/go-code-review-instruction.md"
+    project_guidelines: "/path/to/disbursement-service/.github/copilot-instructions.md"
+    default_target_branch: "master"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
+
+  # Form Service
+  - repo_slug: "mid-kelola-indonesia/form-service"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/go-code-review-instruction.md"
+    project_guidelines: "/path/to/form-service/.github/copilot-instructions.md"
+    default_target_branch: "main"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
+
+  # Notification Service
+  - repo_slug: "mid-kelola-indonesia/notification-service"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/go-code-review-instruction.md"
+    project_guidelines: "/path/to/notification-service/.github/copilot-instructions.md"
+    default_target_branch: "main"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
+
+  # Core
+  - repo_slug: "mid-kelola-indonesia/talenta-core"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/core-code-review-instruction.md"
+    project_guidelines: "/path/to/talenta-core/.github/copilot-instructions.md"
+    default_target_branch: "develop"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
+
+  # Backyard
+  - repo_slug: "mid-kelola-indonesia/talenta-backyard"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/backyard-code-review-instruction.md"
+    project_guidelines: "/path/to/talenta-backyard/.github/copilot-instructions.md"
+    default_target_branch: "master"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
+
+  # Backyard API
+  - repo_slug: "mid-kelola-indonesia/talenta-backyard-api"
+    review_instructions: "/path/to/mcp/pull_request_maker_mcp/review_instructions/bapi-code-review-instruction.md"
+    project_guidelines: "/path/to/talenta-backyard-api/.github/copilot-instructions.md"
+    default_target_branch: "master"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
+
+  # Default fallback — used when no exact repo match is found
+  - repo_slug: "*"
+    review_instructions: ""
+    project_guidelines: ""
+    default_target_branch: "master"
+    description_mode: "concise"
+    pr_description_template: "/path/to/mcp/pull_request_maker_mcp/pr_templates/concise.md"
+    default_reviewers:
+      - "{uuid-reviewer-1}"
+      - "{uuid-reviewer-2}"
+    close_source_branch: false
+    gchat_webhook_url: ""
