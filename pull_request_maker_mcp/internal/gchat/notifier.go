@@ -63,6 +63,7 @@ func (n *Notifier) NotifyPRCreated(ctx context.Context, webhookURL string, msg P
 type PRMessage struct {
 	Title        string
 	Author       string
+	AuthorUUID   string
 	Description  string
 	PRURL        string
 	SourceBranch string
@@ -103,7 +104,13 @@ func buildMessage(msg PRMessage) string {
 
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf("*New Pull Request: %s*\n", msg.Title))
-	sb.WriteString(fmt.Sprintf("Author: %s\n", msg.Author))
+
+	// Display author UUID if available, otherwise use display name
+	authorDisplay := msg.Author
+	if msg.AuthorUUID != "" {
+		authorDisplay = msg.AuthorUUID
+	}
+	sb.WriteString(fmt.Sprintf("Author: %s\n", authorDisplay))
 	sb.WriteString(fmt.Sprintf("Description: %s\n", desc))
 
 	if jiraLink != "" {

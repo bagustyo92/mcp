@@ -15,6 +15,7 @@ type PRMetadata struct {
 	SourceBranch string `json:"source_branch"`
 	TargetBranch string `json:"target_branch"`
 	Author       string `json:"author"`
+	AuthorUUID   string `json:"author_uuid"`
 	State        string `json:"state"`
 }
 

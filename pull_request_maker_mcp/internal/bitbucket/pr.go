@@ -39,6 +39,7 @@ func (c *Client) FetchPRMetadata(ctx context.Context, auth config.BitbucketAuth,
 		SourceBranch: jsonNestedString(raw, "source", "branch", "name"),
 		TargetBranch: jsonNestedString(raw, "destination", "branch", "name"),
 		Author:       jsonNestedStringOr(raw, "author", "display_name", "nickname"),
+		AuthorUUID:   jsonNestedString(raw, "author", "uuid"),
 		State:        jsonString(raw, "state"),
 	}, nil
 }

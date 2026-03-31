@@ -45,7 +45,7 @@ func main() {
 	tools.RegisterGetBranchDiff(server, cfg, bbClient, templateLoader)
 	tools.RegisterCreatePR(server, cfg, bbClient, templateLoader)
 	tools.RegisterPostPRComments(server, cfg, bbClient)
-	tools.RegisterNotifyGChat(server, cfg, gchatNotifier)
+	tools.RegisterNotifyGChat(server, cfg, bbClient, gchatNotifier)
 
 	// Graceful shutdown
 	ctx, cancel := context.WithCancel(context.Background())
