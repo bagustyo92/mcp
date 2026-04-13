@@ -76,10 +76,14 @@ func RegisterNotifyGChat(server *mcp.Server, cfg *config.AppConfig, bbClient *bi
 			}
 			ticketURL := gchat.JiraURL(cfg.GChat.JiraBaseURL, ticketKey)
 
+			// Resolve author's email for mention
+			authorEmail := config.FindAuthorEmail(cfg, input.Author, authorUUID)
+
 			msg := gchat.PRMessage{
 				Title:        input.Title,
 				Author:       input.Author,
 				AuthorUUID:   authorUUID,
+				AuthorEmail:  authorEmail,
 				Description:  input.Description,
 				PRURL:        input.PRURL,
 				SourceBranch: input.SourceBranch,

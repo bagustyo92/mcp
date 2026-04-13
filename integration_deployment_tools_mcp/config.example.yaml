@@ -1,0 +1,68 @@
+auth:
+  bitbucket:
+    # Atlassian API Token (recommended — works for both Bitbucket and Confluence)
+    email: "your-email@example.com"
+    api_token: "ATATT3x..."
+    # Legacy App Password (alternative)
+    # username: "your-username"
+    # app_password: "your-app-password"
+
+gchat:
+  webhook_url: "https://chat.googleapis.com/v1/spaces/XXXXX/messages?key=...&token=..."
+  jira_base_url: "https://your-org.atlassian.net/browse"
+
+confluence:
+  base_url: "https://your-org.atlassian.net"
+  space_key: "DEPLOY"
+  parent_page_id: "123456789"
+  template_page_id: "987654321"
+
+repositories:
+  - repo_slug: "mid-kelola-indonesia/talenta-data-api"
+    default_branch: "master"
+    tag_pattern: "semver"
+    pipelines:
+      production:
+        name: "deploy-to-production"
+        ref_type: "tag"
+      ppe:
+        name: "deploy-to-ppe"
+        ref_type: "commit"
+
+  - repo_slug: "mid-kelola-indonesia/disbursement-service"
+    default_branch: "master"
+    tag_pattern: "semver"
+    pipelines:
+      production:
+        name: "deploy-to-production"
+        ref_type: "tag"
+      ppe:
+        name: "deploy-to-ppe"
+        ref_type: "commit"
+
+  - repo_slug: "mid-kelola-indonesia/form-service"
+    default_branch: "master"
+    tag_pattern: "semver"
+    pipelines:
+      production:
+        name: "deploy-to-production"
+        ref_type: "tag"
+      ppe:
+        name: "deploy-to-ppe"
+        ref_type: "commit"
+
+  - repo_slug: "mid-kelola-indonesia/notification-service"
+    default_branch: "master"
+    tag_pattern: "semver"
+    pipelines:
+      production:
+        name: "deploy-to-production"
+        ref_type: "tag"
+      ppe:
+        name: "deploy-to-ppe"
+        ref_type: "commit"
+
+  - repo_slug: "*"
+    default_branch: "master"
+    tag_pattern: "manual"
+    pipelines: {}

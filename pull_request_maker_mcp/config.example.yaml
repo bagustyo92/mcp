@@ -27,6 +27,27 @@ gchat:
   # Base URL for Jira ticket links — used to auto-generate links from branch names.
   jira_base_url: "https://your-org.atlassian.net/browse"
 
+  # Map Bitbucket authors to their email addresses for display in Google Chat mentions.
+  # When a PR notification is sent, the author's email will be displayed in the message.
+  #
+  # Lookup order: bitbucket_name (case-insensitive) → bitbucket_uuid (fallback)
+  user_mappings:
+    - bitbucket_name: "Bagus Prasetyo"
+      email: "bagus@example.com"
+    - bitbucket_name: "Alfin Barriky"
+      email: "alfin@example.com"
+    - bitbucket_name: "Michael Anthony Hadirahardja"
+      email: "michael@example.com"
+    - bitbucket_name: "Muhammad Mujir"
+      email: "mujir@example.com"
+    - bitbucket_name: "Maulana Ibrahim"
+      email: "maulana@example.com"
+    - bitbucket_name: "Wendy Thedy"
+      email: "wendy@example.com"
+    # You can also map by Bitbucket UUID as a fallback (optional):
+    # - bitbucket_uuid: "{abc123-def456-...}"
+    #   email: "user@example.com"
+
 # Map repositories to their review instructions, guidelines, and PR defaults.
 # Use "*" as repo_slug for a default/fallback configuration.
 #

@@ -108,6 +108,29 @@ func FindProjectConfigBySlug(cfg *AppConfig, slug string) *ProjectConfig {
 	return nil
 }
 
+// FindAuthorEmail looks up the email for a Bitbucket author.
+// It searches by display name (case-insensitive) first, then by UUID as fallback.
+// Returns an empty string if no mapping is found.
+func FindAuthorEmail(cfg *AppConfig, authorName, authorUUID string) string {
+	for _, m := range cfg.GChat.UserMappings {
+		if m.BitbucketName != "" && strings.EqualFold(m.BitbucketName, authorName) {
+			return m.Email
+		}
+	}
+
+	if authorUUID != "" {
+		cleanUUID := strings.Trim(authorUUID, "{}")
+		for _, m := range cfg.GChat.UserMappings {
+			cleanMappingUUID := strings.Trim(m.BitbucketUUID, "{}")
+			if cleanMappingUUID != "" && strings.EqualFold(cleanMappingUUID, cleanUUID) {
+				return m.Email
+			}
+		}
+	}
+
+	return ""
+}
+
 // LoadFileContent reads a file from disk. Returns empty string if path is empty or file not found.
 func LoadFileContent(filePath string) string {
 	if strings.TrimSpace(filePath) == "" {

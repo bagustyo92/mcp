@@ -54,3 +54,9 @@ Only mark ✅ Safe if all REQUIRED CHECKS pass and MERGE-SAFETY DRY RUN is clean
 please help me review from hermes-web workspace branch feat/ejt10-4198-integration_update_approval_workflow to development, please ignore the pnpm and linter check and just focus on the review changes
 
 please use git kraken to execute all the git tools command
+
+
+notes: 
+- use git kraken mcp to execute all the git tools command
+- make sure included branch that mentioned are on the latest commit, if not please pull the latest commit first before execute any git tools command
+- make sure all unit test are passed using command make test.unit, and preview the coverage using make test.coverage, make sure the coverage is above the standard threshold

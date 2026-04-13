@@ -64,6 +64,7 @@ type PRMessage struct {
 	Title        string
 	Author       string
 	AuthorUUID   string
+	AuthorEmail  string // Author's email for mention (e.g. "bagus@example.com")
 	Description  string
 	PRURL        string
 	SourceBranch string
@@ -105,10 +106,10 @@ func buildMessage(msg PRMessage) string {
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf("*New Pull Request: %s*\n", msg.Title))
 
-	// Display author UUID if available, otherwise use display name
+	// Display author email if available, otherwise use display name
 	authorDisplay := msg.Author
-	if msg.AuthorUUID != "" {
-		authorDisplay = msg.AuthorUUID
+	if msg.AuthorEmail != "" {
+		authorDisplay = msg.AuthorEmail
 	}
 	sb.WriteString(fmt.Sprintf("Author: %s\n", authorDisplay))
 	sb.WriteString(fmt.Sprintf("Description: %s\n", desc))
